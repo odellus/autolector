@@ -59,22 +59,22 @@ Answer:
 To run the API inside a container you need to take the following steps:
 1. #### Install docker
   Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system. You still need to have run `install_dependencies.sh` and have a `models` directory in repository root directory.
-3. #### Build the container
+2. #### Build the container
   Open a terminal and run:
   ```bash
   cd /path/to/question_answering_api # Optional if you're in repo root already.
   # Build container and name image qa-api with version tag v1.
   docker build -t qa-api:v1
   ```
-4. #### Start the container
+3. #### Start the container
   In the same terminal, type in:
   ```bash
   docker run \
     -p 5000:5000 \ # Map port 5000 in container to port localhost:5000
     -v /path/to/question_answering_api/models:/app/models \ # Use abspath!
     qa-api:v1
-    ```
-5. #### Run the client
+  ```
+4. #### Run the client
   In a new terminal window (just like before, we need two open), run the following:
   ```bash
   # Make sure you're in repo root!
