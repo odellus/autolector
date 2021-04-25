@@ -29,7 +29,8 @@ class QuestionAnsweringApi(Resource):
         POST method. Body of POST request must be in JSON format with schema:
             { question: Question being asked,
               context: Document containing answer }
-        Returns a JSON object.
+        Returns a JSON object with schema:
+            { answer: Answer to question extracted from context}
         '''
         inputs = request.get_json(force=True)
         question, context = inputs.get('question'), inputs.get('context')
