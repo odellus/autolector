@@ -4,16 +4,16 @@ Hello all! This is a little example of a question answering API for using :hugs:
 
 ### Install
 1. The only requirements are [Git](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-20-04) and [Python3](https://docs.python-guide.org/starting/install3/linux/) with [pip](https://pip.pypa.io/en/stable/installing/) installed in a Linux environment. If you are using Windows I recommend [installing Ubuntu for Windows](https://ubuntu.com/tutorials/ubuntu-on-windows). If you don't have pip installed, you can open a terminal and enter:
-  ```bash
-  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  python3 get-pip.py
-  ```
+    ```bash
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
+    ```
 2. In the same or a new terminal enter:
-  ```bash
-  cd /path/to/question_answering_api # Where ever you forked it to. I don't know!
-  python3 -m pip install requirements.txt
-  ```
-  and that should install the requirements for the Question Answering API.
+    ```bash
+    cd /path/to/question_answering_api # Where ever you forked it to. I don't know!
+    python3 -m pip install requirements.txt
+    ```
+    and that should install the requirements for the Question Answering API.
 
 ### Usage
 1. #### Start the API server  
@@ -30,7 +30,7 @@ Hello all! This is a little example of a question answering API for using :hugs:
     python3 question_answering_client.py
     ```
 
-    You should see something like this
+    You should see something like this.
 ```
 Context:
     The Amazon rainforest (Portuguese: Floresta Amazônica or
