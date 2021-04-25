@@ -2,7 +2,11 @@ import json
 import time
 from flask import Flask, request
 from flask_restful import Resource, Api
-from transformers import pipeline
+from transformers import (
+    pipeline,
+    DistilBertTokenizerFast,
+    DistilBertForQuestionAnswering
+    )
 
 # Initialize API.
 app = Flask(__name__)
@@ -14,8 +18,13 @@ def load_model():
     Create a transformers pipeline for question answering inference.
     '''
     print(' * Loading model...')
+    model_dir = 'models'
+    model_name = 'distilbert-base-cased-distilled-squad'
+    model_path = f'./{model_dir}/{model_name}'
     start = time.time()
-    nlp = pipeline('question-answering', model='distilbert-base-cased-distilled-squad')
+    tokenizer = DistilBertTokenizerFast.from_pretrained(model_path)
+    model = DistilBertForQuestionAnswering.from_pretrained(model_path)
+    nlp = pipeline('question-answering', model=model, tokenizer=tokenizer)
     print(f' * Model loaded in {time.time()-start} seconds!')
     return nlp
 

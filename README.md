@@ -3,17 +3,11 @@
 Hello all! This is a little example of using :hugs: [huggingface transformers](https://github.com/huggingface/transformers) and [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/index.html) to create a  question answering API.
 
 ### Install
-1. The only requirements are [Git](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-20-04) and [Python3](https://docs.python-guide.org/starting/install3/linux/) with [pip](https://pip.pypa.io/en/stable/installing/) installed in a Linux environment. If you are using Windows I recommend [installing Ubuntu for Windows](https://ubuntu.com/tutorials/ubuntu-on-windows). If you don't have pip installed, you can open a terminal and enter:
-    ```bash
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python3 get-pip.py
-    ```
-2. In the same or a new terminal enter:
-    ```bash
-    cd /path/to/question_answering_api # Where ever you forked it to. I don't know!
-    python3 -m pip install requirements.txt
-    ```
-    and that should install the requirements for the Question Answering API.
+The only real requirement is a Linux environment. If you are using Windows I recommend [installing Ubuntu for Windows](https://ubuntu.com/tutorials/ubuntu-on-windows). To install the needed software dependencies run:
+```bash
+cd /path/to/question_answering_api
+bash install_dependencies.sh
+```
 
 ### Usage
 1. #### Start the API server  
@@ -54,9 +48,43 @@ Context:
     largest and most biodiverse tract of tropical rainforest
     in the world, with an estimated 390 billion individual
     trees divided into 16,000 species.
-
 Question:
   Which name is also used to describe the Amazon rainforest in English?
 Answer:
   Amazonia.
-```
+```  
+
+### Docker
+
+To run the API inside a container you need to take the following steps:
+1. #### Install docker
+  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system.
+2. #### Download the model and tokenizer
+  We don't want to put large machine learning models inside our containers if we don't have to, so we fetch the models from huggingface.co so we can mount them inside a volume for docker. Open a terminal and run:
+  ```bash
+  cd /path/to/question_answering_api
+  bash fetch_model.sh
+  ```
+  This will pull the model and save it to a directory we can mount as a volume for our container.
+3. #### Build the container
+  In the same or a new terminal, run:
+  ```bash
+  cd /path/to/question_answering_api # Optional if you're in repo root already.
+  # Build container and name image qa-api with version tag v1.
+  docker build -t qa-api:v1
+  ```
+4. #### Start the container
+  In the same terminal, type in:
+  ```bash
+  docker run \
+    -p 5000:5000 \ # Map port 5000 in container to port localhost:5000
+    -v /path/to/question_answering_api/models:/app/models \ # Use abspath!
+    qa-api:v1
+    ```
+5. #### Run the client
+  In a new terminal window (just like before, we need two open), run the following:
+  ```bash
+  # Make sure you're in repo root!
+  python3 question_answering_api.py
+  ```
+And that's it! If you want to host your container in the cloud now it's as easy as saying `docker push`.
