@@ -16,8 +16,8 @@ print(f' * Model loaded in {time.time()-start} seconds!')
 
 class QuestionAnsweringApi(Resource):
     def get(self):
-        return {'question':'The question to be asked.',
-            'context': 'The context for the question.'}
+        return json.dumps({'question':'The question to be asked.',
+            'context': 'The context for the question.'})
     def post(self):
         inputs = request.get_json(force=True)
         print(inputs)
