@@ -1,6 +1,6 @@
 # Question Answering API
 
-Hello all! This is a little example of a question answering API for using :hugs: [huggingface](https://huggingface.co/) and [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/index.html) to create a RESTful natural language processing API with minimal amounts of coding.
+Hello all! This is a little example of using :hugs: [huggingface transformers](https://github.com/huggingface/transformers) and [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/index.html) to create a  question answering API.
 
 ### Install
 1. The only requirements are [Git](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-20-04) and [Python3](https://docs.python-guide.org/starting/install3/linux/) with [pip](https://pip.pypa.io/en/stable/installing/) installed in a Linux environment. If you are using Windows I recommend [installing Ubuntu for Windows](https://ubuntu.com/tutorials/ubuntu-on-windows). If you don't have pip installed, you can open a terminal and enter:
@@ -22,7 +22,8 @@ Hello all! This is a little example of a question answering API for using :hugs:
     cd /path/to/question_answering_api
     python3 question_answering_api.py
     ```
-    and let it run while you're playing around with it. To kill the server press `Ctrl-C` while this terminal window is selected and it will close the process.
+    and let it run while you're playing around with it. To kill the server press `Ctrl-C` while this terminal window is selected and it will close the process.  
+    _Note_: The first time this runs `transformers` will need to download [the model](https://huggingface.co/distilbert-base-cased-distilled-squad).
 2. #### Run the client.
     In a new terminal (_yes you need two open at the same time!_), run the commands:
     ```bash
