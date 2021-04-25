@@ -58,7 +58,7 @@ Answer:
 
 To run the API inside a container you need to take the following steps:
 1. #### Install docker
-  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system. You still need to have run `install_dependencies.sh` and have a `models` directory in repository root directory.
+  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system. You still need to have run `install_dependencies.sh` and have a `models` directory in repository root directory.  
 2. #### Build the container
   Open a terminal and run:
   ```bash
