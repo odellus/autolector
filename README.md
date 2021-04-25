@@ -6,7 +6,8 @@ Hello all! This is a little example of using :hugs: [huggingface transformers](h
 The only real requirement is a Linux environment. If you are using Windows I recommend [installing Ubuntu for Windows](https://ubuntu.com/tutorials/ubuntu-on-windows). To install the needed software dependencies run:
 ```bash
 cd /path/to/question_answering_api
-bash install_dependencies.sh
+bash install_dependencies.sh # This may take a while.
+bash fetch_model.sh # So could this, depending on your connection speed.
 ```
 
 ### Usage
@@ -17,7 +18,7 @@ bash install_dependencies.sh
     python3 question_answering_api.py
     ```
     and let it run while you're playing around with it. To kill the server press `Ctrl-C` while this terminal window is selected and it will close the process.  
-    _Note_: The first time this runs `transformers` will need to download [the model](https://huggingface.co/distilbert-base-cased-distilled-squad).
+
 2. #### Run the client.
     In a new terminal (_yes you need two open at the same time!_), run the commands:
     ```bash
@@ -58,17 +59,23 @@ Answer:
 
 To run the API inside a container you need to take the following steps:
 1. #### Install docker
-  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system. You still need to have run `install_dependencies.sh` and have a `models` directory in repository root directory.  
+  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system.  
 
-2. #### Build the container
+2. #### Download models  
+  To download the models from hugging face open a terminal, navigate to the repository, and run
+  ```bash
+  bash fetch_model.sh
+  ```
+
+3. #### Build the container
   Open a terminal and run:
   ```bash
   cd /path/to/question_answering_api # Optional if you're in repo root already.
   # Build container and name image qa-api with version tag v1.
-  docker build -t qa-api:v1
+  docker build -t qa-api:v1 .
   ```
 
-3. #### Start the container
+4. #### Start the container
   In the same terminal, type in:
   ```bash
   docker run \
@@ -77,11 +84,11 @@ To run the API inside a container you need to take the following steps:
     qa-api:v1
   ```  
 
-4. #### Run the client
+5. #### Run the client
   In a new terminal window (just like before, we need two open), run the following:
   ```bash
   # Make sure you're in repo root!
   python3 question_answering_api.py
   ```  
-  
-And that's it! If you want to host your API in the cloud now it's almost as easy as saying `docker push`.
+
+And that's it! If you want to [host your API in the cloud](https://geekflare.com/docker-hosting-platforms/) now it's almost as easy as saying `docker push`.
