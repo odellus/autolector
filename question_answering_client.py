@@ -10,22 +10,28 @@ context = '''The Amazon rainforest (Portuguese: Floresta Amazônica or Amazônia
 
 url = 'http://127.0.0.1:5000'
 
-def question_answering_client(question, context):
+def question_answering_client(question, context, url=url):
     '''
-
+    A simple client function for our question answering API.
     '''
     data = {'question': question, 'context': context}
     body = json.dumps(data)
     result = requests.post(url, data=body)
-    answer = json.loads(result.json()).get('answer')
-    return answer
+    return result.json().get('answer')
 
-if __name__ == "__main__":
-    answer = question_answering_client(question, context)
+def get_indented_context(context):
+    '''
+    Indent the context for easier readability.
+    '''
     context_stream = StringIO()
     pprint(context, stream=context_stream, indent=0, width=60)
     context_str = context_stream.getvalue()
-    context_str = context_str.replace('\'', '').replace('\n', '\n\t')
-    print(f'Context:\n\t{context_str}')
+    # pprint puts text in parenthesis and adds newlines to the end.
+    return context_str.replace('\'', '').replace('\n', '\n\t')[1:-3]
+
+if __name__ == "__main__":
+    answer = question_answering_client(question, context)
+    indented_context = get_indented_context(context)
+    print(f'Context:\n\t {indented_context}\n')
     print(f'Question:\n\t{question}')
     print(f'Answer:\n\t{answer}.')
