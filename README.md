@@ -58,16 +58,9 @@ Answer:
 
 To run the API inside a container you need to take the following steps:
 1. #### Install docker
-  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system.
-2. #### Download the model and tokenizer
-  We don't want to put large machine learning models inside our containers if we don't have to, so we fetch the models from huggingface.co so we can mount them inside a volume for docker. Open a terminal and run:
-  ```bash
-  cd /path/to/question_answering_api
-  bash fetch_model.sh
-  ```
-  This will pull the model and save it to a directory we can mount as a volume for our container.
+  Follow the instructions [here](https://docs.docker.com/engine/install/) to install docker on your system. You still need to have run `install_dependencies.sh` and have a `models` directory in repository root directory.
 3. #### Build the container
-  In the same or a new terminal, run:
+  Open a terminal and run:
   ```bash
   cd /path/to/question_answering_api # Optional if you're in repo root already.
   # Build container and name image qa-api with version tag v1.
@@ -87,4 +80,4 @@ To run the API inside a container you need to take the following steps:
   # Make sure you're in repo root!
   python3 question_answering_api.py
   ```
-And that's it! If you want to host your container in the cloud now it's as easy as saying `docker push`.
+And that's it! If you want to host your API in the cloud now it's almost as easy as saying `docker push`.
