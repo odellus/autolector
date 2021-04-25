@@ -29,9 +29,15 @@ def get_indented_context(context):
     # pprint puts text in parenthesis and adds newlines to the end.
     return context_str.replace('\'', '').replace('\n', '\n\t')[1:-3]
 
-if __name__ == "__main__":
+def main():
+    '''
+    Main procedure for calling question_answering_client and displaying results.
+    '''
     answer = question_answering_client(question, context)
     indented_context = get_indented_context(context)
     print(f'Context:\n\t {indented_context}\n')
     print(f'Question:\n\t{question}')
     print(f'Answer:\n\t{answer}.')
+
+if __name__ == "__main__":
+    main()
