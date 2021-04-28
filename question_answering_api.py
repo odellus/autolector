@@ -2,6 +2,8 @@ import json
 import time
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_cors import CORS
+from urllib.parse import parse_qs
 from transformers import (
     pipeline,
     DistilBertTokenizerFast,
@@ -10,6 +12,7 @@ from transformers import (
 
 # Initialize API.
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 # Load question answering model.
@@ -33,6 +36,10 @@ class QuestionAnsweringApi(Resource):
     Class to describes get, post, etc.. methods of our RESTful
     question answering API. Inheirits flask_restful.Resource.
     '''
+    def get(self):
+        return 'Send a POST request with the form \
+        { question: Question being asked, context: Document containing answer }'
+
     def post(self):
         '''
         POST method. Body of POST request must be in JSON format with schema:
@@ -42,13 +49,17 @@ class QuestionAnsweringApi(Resource):
             { answer: Answer to question extracted from context}
         '''
         inputs = request.get_json(force=True)
-        question, context = inputs.get('question'), inputs.get('context')
+        question = parse_qs(inputs['question'])['question'].pop()
+        context = parse_qs(inputs['context'])['context'].pop()
+        print(question)
+        print(context)
         result = nlp(question=question, context=context)
         answer = result['answer']
+        print(answer)
         return {'answer': answer}
 
 # api
-api.add_resource(QuestionAnsweringApi, '/')
+api.add_resource(QuestionAnsweringApi, '/qa')
 port = 5000
 
 if __name__ == '__main__':

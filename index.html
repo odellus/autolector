@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+<body>
+<form name="contextQuestion" method="post">
+<label for="Context">Context:</label>
+<textarea id="context" name="context" rows="10" cols="80">
+Add the context you want to answer a question from...
+</textarea>
+<br><br>
+<label for="question">Question:</label>
+<textarea id="question" name="question" rows="1" cols="80">
+Type your question here...
+</textarea>
+<br><br>
+<input type="submit" value="Ask">
+</form>
+<p>Click the "Ask" button and the form-data will be sent to the QA API.
+<br><br>
+Answer:
+<div id="answer" style="width: 600px; border:2px black solid; font-size:24px; display:inline">
+
+<em>The answer is...</em>
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+  $(document).ready(function(){
+    $('[name="contextQuestion"]').click(function(e)
+    {
+      var MyForm = JSON.stringify({
+        question:$("#question").serialize(),
+         context:$("#context").serialize()
+       });
+      console.log(MyForm)
+      $.ajax({
+        url: "http://127.0.0.1:5000/qa",
+        type: "POST",
+        dataType: 'json',
+        data: MyForm,
+        success:function(response)
+        {
+          var str = JSON.stringify(response.answer);
+          console.log(str);
+          $('#answer').html(str.replaceAll("\"", ""));
+        }
+      });
+      e.preventDefault();
+    });
+  });
+</script>
+</html>
