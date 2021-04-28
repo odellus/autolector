@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="utf-8" />
 <title>Question Answering Agent</title>
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 </head>
 <style>
 body {
@@ -63,8 +64,8 @@ textarea {
 </style>
 <body>
 <div class="header">
-  <a href="https://github.com/odellus/question_answering_api" class="logo"><i class="fa fa-github" aria-hidden="true"></i>
-Question Answering Agent</a>
+  <a href="https://github.com/odellus/question_answering_api" class="logo"><span class="iconify" data-icon="entypo:open-book" data-inline="false"></span><span class="iconify" data-icon="fa-solid:robot" data-inline="false"></span>
+Autolector</a>
   <div class="header-right">
     <a class="active" href="#home">Home</a>
     <a href="https://github.com/odellus"><i class="fa fa-address-card" aria-hidden="true"></i>
@@ -73,7 +74,8 @@ Contact</a>
 About</a>
   </div>
 </div>
-  Put the text containing the answer in the context box and ask away!<br><br>
+<h3>
+  Put the text containing the answer in the context box and ask away!</h3><br>
   <form name="contextQuestion" method="post">
     <label for="Context">Context:</label><br>
     <textarea id="context" name="context" rows="10" cols="80" style="background-color:#b2aaea">
