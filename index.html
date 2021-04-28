@@ -1,5 +1,6 @@
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
 <meta charset="utf-8" />
 <title>Question Answering Agent</title>
 </head>
@@ -9,30 +10,34 @@
     color:#f9f9f9;
     margin-left: 25px;
     margin-top: 10px;
+    font-family: Verdana, Arial, Sans Serif;
+  }
+  textarea {
+    font-family: Courier New, Lucida Sans Typewriter;
   }
 </style>
 <body>
-<h1>
-Question Answering Agent
-</h1>
-Put the text containing the answer in the context box and ask away!<br><br>
-<form name="contextQuestion" method="post">
-<label for="Context">Context:</label><br>
-<textarea id="context" name="context" rows="10" cols="80" style="background-color:#b2aaea">
-Add the context you want to answer a question from...
-</textarea>
-<br><br>
-<label for="question">Question:</label><br>
-<textarea id="question" name="question" rows="1" cols="80" style="background-color:#aacdea">
-Type your question here...
-</textarea>
-<br><br>
-<input type="submit" value="Ask">
-</form>
-Answer:<br>
-<textarea id="answer" name="answer" rows="1" cols="80" style="background-color:#ed8989">
-The answer is...
-</textarea>
+  <h1>
+  Question Answering Agent
+  </h1>
+  Put the text containing the answer in the context box and ask away!<br><br>
+  <form name="contextQuestion" method="post">
+    <label for="Context">Context:</label><br>
+    <textarea id="context" name="context" rows="10" cols="80" style="background-color:#b2aaea">
+    Add the context you want to answer a question from...
+    </textarea>
+    <br><br>
+    <label for="question">Question:</label><br>
+    <textarea id="question" name="question" rows="1" cols="80" style="background-color:#aacdea">
+    Type your question here...
+    </textarea>
+    <br><br>
+    <input type="submit" value="Ask">
+  </form>
+  Answer:<br>
+  <textarea id="answer" name="answer" rows="1" cols="80" style="background-color:#ed8989">
+  The answer is...
+  </textarea>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
