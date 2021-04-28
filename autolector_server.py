@@ -20,6 +20,7 @@ logging.basicConfig(
     )
 logging.debug('This should go to the file!')
 
+# Get a connection to the sqlite3 table 'autolector'
 db = AutolectorDB()
 
 # Initialize API.
