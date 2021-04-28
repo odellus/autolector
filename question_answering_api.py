@@ -1,5 +1,6 @@
 import json
 import time
+import logging
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS
@@ -9,6 +10,13 @@ from transformers import (
     DistilBertTokenizerFast,
     DistilBertForQuestionAnswering
     )
+
+# Set up logger.
+logging.basicConfig(
+    filename='qa_server.log',
+    level=logging.DEBUG
+    )
+logging.debug('This should go to the file!')
 
 # Initialize API.
 app = Flask(__name__)
@@ -20,15 +28,19 @@ def load_model():
     '''
     Create a transformers pipeline for question answering inference.
     '''
-    print(' * Loading model...')
+    msg = ' * Loading model...'
+    logging.info(msg)
     model_dir = 'models'
     model_name = 'distilbert-base-cased-distilled-squad'
     model_path = f'./{model_dir}/{model_name}'
+    msg = f'Model loaded from {model_path}'
+    logging.info(msg)
     start = time.time()
     tokenizer = DistilBertTokenizerFast.from_pretrained(model_path)
     model = DistilBertForQuestionAnswering.from_pretrained(model_path)
     nlp = pipeline('question-answering', model=model, tokenizer=tokenizer)
-    print(f' * Model loaded in {time.time()-start} seconds!')
+    msg = f' * Model loaded in {time.time()-start} seconds!'
+    logging.info(msg)
     return nlp
 
 class QuestionAnsweringApi(Resource):
@@ -51,11 +63,11 @@ class QuestionAnsweringApi(Resource):
         inputs = request.get_json(force=True)
         question = parse_qs(inputs['question'])['question'].pop()
         context = parse_qs(inputs['context'])['context'].pop()
-        print(question)
-        print(context)
         result = nlp(question=question, context=context)
         answer = result['answer']
-        print(answer)
+        logging.info(question)
+        logging.info(context)
+        logging.info(answer)
         return {'answer': answer}
 
 # api

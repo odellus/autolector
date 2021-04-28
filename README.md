@@ -92,3 +92,11 @@ To run the API inside a container you need to take the following steps:
   ```  
 
 And that's it! If you want to [host your API in the cloud](https://geekflare.com/docker-hosting-platforms/) now it's almost as easy as saying `docker push`.
+
+### Web page
+Alternately, you can open up a browser navigate to `./index.html` or open a terminal and enter:
+```bash
+# You've got to change /path/to -> <the actual path>
+firefox file:///path/to/question_answering_api/index.html
+```
+after getting the API running locally or through Docker. I recommend this way, as it shows the real value of putting a service behind an API rather than creating a question answering agent on the command line.

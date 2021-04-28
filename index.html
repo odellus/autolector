@@ -1,42 +1,95 @@
 <html>
 <head>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="utf-8" />
 <title>Question Answering Agent</title>
 </head>
 <style>
-  body {
-    background-color:#6d6d6d;
-    color:#f9f9f9;
-    margin-left: 25px;
-    margin-top: 10px;
-    font-family: Verdana, Arial, Sans Serif;
+body {
+  background-color:#6d6d6d;
+  color:#f9f9f9;
+  margin-left: 25px;
+  font-family: Verdana, Arial, Sans Serif;
+}
+textarea {
+  font-family: Courier New, Lucida Sans Typewriter;
+}
+.header {
+  overflow: hidden;
+  background-color: #d5d5d5;
+  padding: 30px 10px;
+}
+.header a {
+  float: left;
+  color: #3c3c3c;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #9fddd0;
+  color: black;
+}
+
+.header a.active {
+  background-color: #9f87cf;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
   }
-  textarea {
-    font-family: Courier New, Lucida Sans Typewriter;
+
+  .header-right {
+    float: none;
   }
+}
 </style>
 <body>
-  <h1>
-  Question Answering Agent
-  </h1>
+<div class="header">
+  <a href="https://github.com/odellus/question_answering_api" class="logo"><i class="fa fa-github" aria-hidden="true"></i>
+Question Answering Agent</a>
+  <div class="header-right">
+    <a class="active" href="#home">Home</a>
+    <a href="https://github.com/odellus"><i class="fa fa-address-card" aria-hidden="true"></i>
+Contact</a>
+    <a href="http://phytomech.com"><i class="fa fa-book" aria-hidden="true"></i>
+About</a>
+  </div>
+</div>
   Put the text containing the answer in the context box and ask away!<br><br>
   <form name="contextQuestion" method="post">
     <label for="Context">Context:</label><br>
     <textarea id="context" name="context" rows="10" cols="80" style="background-color:#b2aaea">
-    Add the context you want to answer a question from...
+The Amazon rainforest (Portuguese: Floresta Amazônica or Amazônia; Spanish: Selva Amazónica, Amazonía or usually Amazonia; French: Forêt amazonienne; Dutch: Amazoneregenwoud), also known in English as Amazonia or the Amazon Jungle, is a moist broadleaf forest that covers most of the Amazon basin of South America. This basin encompasses 7,000,000 square kilometres (2,700,000 sq mi), of which 5,500,000 square kilometres (2,100,000 sq mi) are covered by the rainforest. This region includes territory belonging to nine nations. The majority of the forest is contained within Brazil, with 60% of the rainforest, followed by Peru with 13%, Colombia with 10%, and with minor amounts in Venezuela, Ecuador, Bolivia, Guyana, Suriname and French Guiana. States or departments in four nations contain "Amazonas" in their names. The Amazon represents over half of the planet\'s remaining rainforests, and comprises the largest and most biodiverse tract of tropical rainforest in the world, with an estimated 390 billion individual trees divided into 16,000 species.
     </textarea>
     <br><br>
     <label for="question">Question:</label><br>
     <textarea id="question" name="question" rows="1" cols="80" style="background-color:#aacdea">
-    Type your question here...
+How many countries contain rainforest?
     </textarea>
     <br><br>
     <input type="submit" value="Ask">
   </form>
   Answer:<br>
   <textarea id="answer" name="answer" rows="1" cols="80" style="background-color:#ed8989">
-  The answer is...
+The answer is...
   </textarea>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
@@ -44,16 +97,16 @@
   $(document).ready(function(){
     $('[name="contextQuestion"]').click(function(e)
     {
-      var MyForm = JSON.stringify({
+      var QuestionContext = JSON.stringify({
         question:$("#question").serialize(),
          context:$("#context").serialize()
        });
-      console.log(MyForm)
+      console.log(QuestionContext)
       $.ajax({
         url: "http://127.0.0.1:5000/qa",
         type: "POST",
         dataType: 'json',
-        data: MyForm,
+        data: QuestionContext,
         success:function(response)
         {
           var str = JSON.stringify(response.answer);
