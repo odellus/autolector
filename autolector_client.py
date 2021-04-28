@@ -23,7 +23,7 @@ context = '''The Amazon rainforest (Portuguese: Floresta Amazônica or Amazônia
 
 url = 'http://127.0.0.1:5000/qa'
 
-def question_answering_client(question, context, url=url):
+def autolector_client(question, context, url=url):
     '''
     A simple client function for our question answering API.
     '''
@@ -48,7 +48,7 @@ def ask_question(question):
     '''
     Main procedure for calling question_answering_client and displaying results.
     '''
-    answer = question_answering_client(question, context)
+    answer = autolector_client(question, context)
     print(f'Question:\n\t{question}')
     print(f'Answer:\n\t{answer}.')
 

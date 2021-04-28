@@ -10,13 +10,17 @@ from transformers import (
     DistilBertTokenizerFast,
     DistilBertForQuestionAnswering
     )
+# Out local package
+from autolector_db import AutolectorDB
 
 # Set up logger.
 logging.basicConfig(
-    filename='qa_server.log',
+    filename='autolector.log',
     level=logging.DEBUG
     )
 logging.debug('This should go to the file!')
+
+db = AutolectorDB()
 
 # Initialize API.
 app = Flask(__name__)
@@ -43,7 +47,7 @@ def load_model():
     logging.info(msg)
     return nlp
 
-class QuestionAnsweringApi(Resource):
+class AutolectorApi(Resource):
     '''
     Class to describes get, post, etc.. methods of our RESTful
     question answering API. Inheirits flask_restful.Resource.
@@ -68,10 +72,11 @@ class QuestionAnsweringApi(Resource):
         logging.info(question)
         logging.info(context)
         logging.info(answer)
+        db.insert(question, context, answer)
         return {'answer': answer}
 
 # api
-api.add_resource(QuestionAnsweringApi, '/qa')
+api.add_resource(AutolectorApi, '/qa')
 port = 5000
 
 if __name__ == '__main__':

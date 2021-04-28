@@ -1,2 +1,4 @@
 models
 *.log
+*.db
+__pycache__
