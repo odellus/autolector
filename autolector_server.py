@@ -54,8 +54,8 @@ class AutolectorApi(Resource):
     question answering API. Inheirits flask_restful.Resource.
     '''
     def get(self):
-        return 'Send a POST request with the form \
-        { question: Question being asked, context: Document containing answer }'
+        return 'Send a POST request with the form ' + \
+        '{ question: Question being asked, context: Document containing answer }'
 
     def post(self):
         '''
