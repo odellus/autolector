@@ -6,7 +6,7 @@ Hello all! This is a little example of using :hugs: [huggingface transformers](h
 ### Install
 The only real requirement is a Linux environment. If you are using Windows I recommend [installing Ubuntu for Windows](https://ubuntu.com/tutorials/ubuntu-on-windows). To install the needed software dependencies run:
 ```bash
-cd /path/to/question_answering_api
+cd /path/to/autolector
 bash install_dependencies.sh # This may take a while.
 bash fetch_model.sh # So could this, depending on your connection speed.
 ```
